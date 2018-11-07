@@ -11,11 +11,22 @@ namespace Lab10
         static void Main(string[] args)
         {
             StartUp();
-            Console.Write("Enter radius: ");
-            var _radius = Validator.ValidatedRadius(Console.ReadLine());
-            var circle = new Circle(_radius);
-            Console.WriteLine($"Circumference: {circle.CalculateFormattedCircumference()}");
-            Console.WriteLine($"Area: {circle.CalculateFormattedArea()}");
+            do
+            {
+                Console.Write("Enter radius: ");
+                var _radius = Validator.ValidatedRadius(Console.ReadLine());
+                var circle = new Circle(_radius);
+                Console.WriteLine($"Circumference: {circle.CalculateFormattedCircumference()}");
+                Console.WriteLine($"Area: {circle.CalculateFormattedArea()}");
+                Console.Write("Try again? (y/n): ");
+                ConsoleKeyInfo repeat = Console.ReadKey();
+                Console.WriteLine();
+                if (!repeat.KeyChar.Equals('y'))
+                {
+                    break;
+                }
+            } while (true);
+            Console.WriteLine("¡Adios!");
             Console.ReadKey();
         }
 
