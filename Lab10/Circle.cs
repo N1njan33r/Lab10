@@ -1,13 +1,22 @@
 ﻿using System;
+using System.Threading;
 
 namespace Lab10
 {
     class Circle
     {
         private double Radius { get; set; }
+        public static int counter = 0;
+
         public Circle(double radius)
         {
+            Interlocked.Increment(ref counter);
             Radius = radius;
+        }
+
+        ~Circle()
+        {
+            Interlocked.Decrement(ref counter);
         }
 
         public double CalculateCircumference()
@@ -18,7 +27,7 @@ namespace Lab10
 
         public string CalculateFormattedCircumference()
         {
-            return CalculateCircumference().ToString();
+            return (Math.Truncate(CalculateCircumference()*100)/100).ToString();
         }
 
         public double CalculateArea()
@@ -29,7 +38,7 @@ namespace Lab10
 
         public string CalculateFormattedArea()
         {
-            return CalculateArea().ToString();
+            return (Math.Truncate(CalculateArea()*100)/100).ToString();
         }
 
         private string FormatNumber(double x)
